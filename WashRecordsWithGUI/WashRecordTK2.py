@@ -1,6 +1,8 @@
+from string import hexdigits
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import ttk
+from PIL import ImageTk
 
 #from WashRecordsWithGUI.WashRecordsWGUIv2_SaveAs import saveFile
 
@@ -8,9 +10,13 @@ root = tk.Tk()
 root.title("Wash Record Generator - Sinclair Interplanetary by Rocket Lab")
 root.eval("tk::PlaceWindow . center")
 
-frame = tk.Frame(root, width=500, height= 900)
-frame.pack()
+frame1 = tk.Frame(root, width=500, height= 900)
+frame1.grid(row=0, column=0)
 
+logo_img = ImageTk.PhotoImage(file="WashRecordsWithGUI/WashAppBottom.png")
+logo_widget = tk.Label(frame1, image=logo_img)
+logo_widget.image = logo_img
+logo_widget.pack()
 
 def enter_data():
     DataEntry = date_entry.get()
@@ -31,8 +37,8 @@ def saveFile():
 '''
 
 #User input frame
-user_info_frame = tk.LabelFrame(frame)
-user_info_frame.grid(row= 0, column= 0, sticky="news", padx=10, pady=10)
+user_info_frame = tk.LabelFrame(frame1, width=500, height= 900)
+user_info_frame.grid()
 
 #User info
 date_label = tk.Label(user_info_frame, text="Date:")
@@ -72,7 +78,7 @@ report_entry.grid(row=7, column=1)
 for widget in user_info_frame.winfo_children():
     widget.grid_configure(padx=5, pady=5)
 
-button = tk.Button(frame, text="Generate Report", command= enter_data)
+button = tk.Button(frame1, text="Generate Report", command= enter_data)
 #button.pack()
 button.grid(row=3, column=0, sticky="news", padx=10, pady=10)
 
