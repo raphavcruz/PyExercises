@@ -1,6 +1,8 @@
 import tkinter
-from tkinter import *
 from tkinter import filedialog
+from tkinter import ttk
+
+from WashRecordsWithGUI.WashRecordsWGUIv2_SaveAs import saveFile
 
 window = tkinter.Tk()
 window.title("Wash Record Generator - Sinclair Interplanetary by Rocket Lab")
@@ -10,20 +12,22 @@ frame.pack()
 
 
 def enter_data():
-    dataentry = date_entry.get()
-    nameentry = name_entry.get()
-    washentry = wash_spinbox.get()
-    pcastaentry = pcasta_combobox.get()
-    prodentry = prod_combobox.get()
-    batchentry = batch_entry.get()
-    serialentry = serial_entry.get()
-    reportentry = report_entry.get()
+    DataEntry = date_entry.get()
+    NameEntry = name_entry.get()
+    WashEntry = wash_spinbox.get()
+    PCASTAEntry = pcasta_combobox.get()
+    ProdEntry = prod_combobox.get()
+    BatchEntry = batch_entry.get()
+    SerialEntry = serial_entry.get()
+    ReportEntry = report_entry.get()
 
-    #print("Today:", dataentry, "Product: ", prodentry)
+    #print("Today:", DataEntry, "Product: ", ProdEntry)
 
+''''
 def saveFile():
     file = filedialog.asksaveasfile(defaultextension='.docx')
     #filedata = str
+'''
 
 #User input frame
 user_info_frame = tkinter.LabelFrame(frame)
@@ -65,9 +69,9 @@ report_entry = tkinter.Entry(user_info_frame)
 report_entry.grid(row=7, column=1)
 
 for widget in user_info_frame.winfo_children():
-    widget.grid_configure(padx=5, pady=5, )
+    widget.grid_configure(padx=5, pady=5)
 
-button = tkinter.Button(frame, text="Generate Report", command= enter_data, saveFile)
+button = tkinter.Button(frame, text="Generate Report", command= enter_data)
 button.pack()
 button.grid(row=3, column=0, sticky="news", padx=10, pady=10)
 
