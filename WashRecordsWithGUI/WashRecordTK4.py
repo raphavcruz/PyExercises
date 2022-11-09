@@ -99,12 +99,12 @@ report_entry.grid(row=7, column=1, padx=10, pady=2)
 button = tk.Button(frame2, text="GENERATE REPORT", font=("TkHeadingFont", 12, BOLD), bg="#D72020", fg="#FFFFFF", cursor="hand2", activebackground="#DC143C", activeforeground="#FFFFFF", command=enter_data)
 button.grid(row=15, column=0, sticky="news", padx=10, pady=10)
 
-logo_img = ImageTk.PhotoImage(file="WashRecordsWithGUI/WashAppTop.png")
+logo_img = ImageTk.PhotoImage(file="WashAppTop.png")
 logo_widget = tk.Label(frame0, image=logo_img, bg=bg_color)
 logo_widget.image = logo_img
 logo_widget.pack()
 
-logo_img = ImageTk.PhotoImage(file="WashRecordsWithGUI/WashAppBottom.png")
+logo_img = ImageTk.PhotoImage(file="WashAppBottom.png")
 logo_widget = tk.Label(frame3, image=logo_img, bg=bg_color)
 logo_widget.image = logo_img
 logo_widget.pack()

@@ -1,12 +1,12 @@
 import tkinter as tk
-from tkinter import END, ttk
+from tkinter import END, ttk, filedialog
 from tkinter.font import BOLD
 from PIL import ImageTk
 from tkcalendar import *
 from docxtpl import DocxTemplate
-import datetime
 
 bg_color = "#000000"
+doc_name = "Cal_Entry" + NameEntry + WashEntry + ".docx"
 
 def gen_report():
     doc = DocxTemplate("WashRecordTempl.docx")
@@ -20,17 +20,17 @@ def gen_report():
     SerialEntry = serial_entry.get()
     ReportEntry = report_entry.get(1.0, END)
 
-    doc.render({#"DATE_INPUT": Cal_Entry,
-               # "NAME_INPUT": NameEntry,
-               # "PRODUCT_MODEL": ProdEntry,
-               # "PCA_STA": PCASTAEntry,
-               # "BATCH_INPUT": BatchEntry,
-               # "SERIAL_INPUT": SerialEntry,
+    doc.render({"DATE_INPUT": Cal_Entry,
+                "NAME_INPUT": NameEntry,
+                "PRODUCT_MODEL": ProdEntry,
+                "PCA_STA": PCASTAEntry,
+                "BATCH_INPUT": BatchEntry,
+                "SERIAL_INPUT": SerialEntry,
                 "PASTE_REPORT": ReportEntry 
                 })
 
-    doc_name = "Cal_Entry" + NameEntry + WashEntry + ".docx"
-    doc.save(doc_name)
+    #file = filedialog.asksaveasfile(defaultextension=".docx")
+    doc.save("doc_name")
 
 #Initialize app
 gui = tk.Tk()
@@ -103,12 +103,12 @@ report_entry.grid(row=7, column=1, padx=10, pady=2)
 button = tk.Button(frame2, text="GENERATE REPORT", font=("TkHeadingFont", 12, BOLD), bg="#D72020", fg="#FFFFFF", cursor="hand2", activebackground="#DC143C", activeforeground="#FFFFFF", command=gen_report)
 button.grid(row=15, column=0, sticky="news", padx=10, pady=10)
 
-logo_img = ImageTk.PhotoImage(file="WashRecordsWithGUI/WashAppTop.png")
+logo_img = ImageTk.PhotoImage(file="WashAppTop.png")
 logo_widget = tk.Label(frame0, image=logo_img, bg=bg_color)
 logo_widget.image = logo_img
 logo_widget.pack()
 
-logo_img = ImageTk.PhotoImage(file="WashRecordsWithGUI/WashAppBottom.png")
+logo_img = ImageTk.PhotoImage(file="WashAppBottom.png")
 logo_widget = tk.Label(frame3, image=logo_img, bg=bg_color)
 logo_widget.image = logo_img
 logo_widget.pack()
