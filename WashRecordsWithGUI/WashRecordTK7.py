@@ -5,10 +5,18 @@ from tkinter.font import BOLD
 from PIL import ImageTk
 from tkcalendar import *
 from docxtpl import DocxTemplate
-from os import path as path
 
 
-# this version creats filename from datetime
+
+
+
+
+
+# Version ready for terminal and template integration
+
+
+
+
 
 
 bg_color = "#000000"
@@ -17,16 +25,19 @@ def gen_report():
     doc = DocxTemplate("WashRecordTempl.docx")
 
     Cal_Entry = date_entry_cal.get()
+    Cal_Entry2 = date_entry_cal.get()
+    Cal_Entry = datetime.datetime.strptime(Cal_Entry, '%m/%d/%y').strftime("%Y%m%d")
+    #Cal_Entry2 = datetime.datetime.strptime(Cal_Entry, '%m/%d/%y').strftime("%Y-%m-%d")
     NameEntry = name_entry.get()
     WashEntry = wash_spinbox.get()
-    WashRecord = datetime.datetime.now().strftime("%Y%m%d") + "-" + NameEntry + "-" + WashEntry
+    WashRecord = Cal_Entry + "-" + NameEntry + "-" + WashEntry
     ProdEntry = prod_combobox.get()
     PCASTAEntry = pcasta_combobox.get()
     BatchEntry = batch_entry.get()
     SerialEntry = serial_entry.get()
     ReportEntry = report_entry.get(1.0, END)
 
-    doc.render({"DATE_INPUT": Cal_Entry,
+    context = ({"DATE_INPUT": Cal_Entry2,
                 "NAME_INPUT": NameEntry,
                 "PRODUCT_MODEL": ProdEntry,
                 "PCA_STA": PCASTAEntry,
@@ -36,10 +47,11 @@ def gen_report():
                 "DATE_NAME_NUM": WashRecord
                 })
 
-    #file = filedialog.asksaveasfile(defaultextension=".docx")
-    doc_name = datetime.datetime.now().strftime("%Y%m%d") + "-" + NameEntry + "-" + WashEntry + ".docx"
-    directory = filedialog.askdirectory()
-    doc.save(path.join(directory, doc_name))
+    file_name = datetime.datetime.strptime(Cal_Entry2, '%m/%d/%y').strftime("%Y%m%d") + "-" + NameEntry + "-" + WashEntry + ".docx"
+    filedialog.asksaveasfilename(defaultextension=".docx", title= "Save wash report as: ", mode= "w", initialfile= file_name)
+    #base_name = os.path.basename(file_name)
+    doc.render(context)
+    #doc.save()
 
 #Initialize app
 gui = tk.Tk()
